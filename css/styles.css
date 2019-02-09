@@ -34,12 +34,28 @@
 
 .regular-page__background {
   position: absolute;
-  top: 3rem;
-  right: 2rem;
+  bottom: 0.2rem;
+  right: 0.3rem;
 }
 
 .regular-page__logo {
-  width: 200px;
+  width: 110px;
 }
 
 /* end regular page styles */
+/* slide adjustments */
+
+.remark-slide-content li {
+  font-size: 2.5rem;
+  line-height: 3.7rem;
+}
+
+.remark-slide-content h1 {
+  font-size: 3.7rem;
+}
+
+.remark-slide-number {
+  right: 120px;
+}
+
+/* end slide adjustments */
