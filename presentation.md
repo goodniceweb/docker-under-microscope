@@ -9,7 +9,7 @@ class: center, middle
   <img src="images/iTechArtComposition.png" class="first-page__footer-image">
 </div>
 
-# Presentation Name
+# Docker under microscope
 
 ---
 layout: true
