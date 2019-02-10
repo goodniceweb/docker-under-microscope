@@ -35,7 +35,7 @@
 .regular-page__background {
   position: absolute;
   bottom: 0.2rem;
-  right: 0.3rem;
+  left: 1rem;
 }
 
 .regular-page__logo {
@@ -54,8 +54,18 @@
   font-size: 3.7rem;
 }
 
-.remark-slide-number {
-  right: 120px;
+.remark-code {
+  font-size: 2rem;
+  line-height: 3rem;
+}
+
+.remark-slide-content.smaller-code .remark-code {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.remark-slide-content.first .remark-slide-number {
+  display: none;
 }
 
 /* end slide adjustments */

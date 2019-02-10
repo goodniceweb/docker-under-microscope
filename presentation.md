@@ -1,4 +1,4 @@
-class: center, middle
+class: center, middle, first
 
 <div class="first-page__header">
   <img src="images/iTechArtLogo.png" class="first-page__logo">
@@ -11,10 +11,6 @@ class: center, middle
 
 # Docker under microscope
 
-<div class="regular-page__background">
-  <img src="images/iTechArtLogo.png" class="regular-page__logo">
-</div>
-
 ---
 layout: true
 
@@ -23,6 +19,7 @@ layout: true
 </div>
 
 ---
+class: center
 
 # A Story
 
@@ -32,37 +29,28 @@ layout: true
 
 # Agenda
 
-1. What is Docker?
+1. What is Docker and How it Works?
 
 ---
 
 # Agenda
 
-1. What is Docker?
-2. How it Works? 
+1. What is Docker and How it Works?
+2. Use Cases
 
 ---
 
 # Agenda
 
-1. What is Docker?
-2. How it Works? 
-3. Use Cases
+1. What is Docker and How it Works?
+2. Use Cases
+3. Pros and Cons
 
 ---
 
 # Agenda
 
-1. What is Docker?
-2. How it Works? 
-3. Use Cases
-4. Pros and Cons
-
----
-
-# Agenda
-
-<ol start="5">
+<ol start="4">
   <li>Top 7 Tips and Tricks</li>
 </ol>
 
@@ -70,19 +58,9 @@ layout: true
 
 # Agenda
 
-<ol start="5">
+<ol start="4">
   <li>Top 7 Tips and Tricks</li>
-  <li>Dockerfile Best Practices</li>
-</ol>
-
----
-
-# Agenda
-
-<ol start="5">
-  <li>Top 7 Tips and Tricks</li>
-  <li>Dockerfile Best Practices</li>
-  <li>Docker Compose Best Practices</li>
+  <li>Best Practices</li>
 </ol>
 
 ---
@@ -90,55 +68,21 @@ layout: true
 # Agenda
 
 
-<ol start="5">
+<ol start="4">
   <li>Top 7 Tips and Tricks</li>
-  <li>Dockerfile Best Practices</li>
-  <li>Docker Compose Best Practices</li>
+  <li>Best Practices</li>
   <li>Docker Swarm or Kubernates?</li>
 </ol>
 
 ---
+class: center
 
 # What is Docker?
 
-![Default-aligned image](images/docker-man.min.jpg)
-
-A person employed in a port to load and unload ships
-
-???
-
-WAIT
-
-Do you think I'm joking?
-
-NEXT
+<img src="images/docker.png" width="400px" />
 
 ---
-
-# Are you kidding me?
-
-![Default-aligned image](images/google-docker-definition.png)
-
-???
-
-WAIT
-
-No, I'm seriously. At the very beginning of google search results
-you can see it by yourself. But to be honest...
-
-NEXT
-
----
-
-# Gotcha!
-
-![Default-aligned image](images/google-docker-first-link.png)
-
-???
-
-Google knows wait I really mean :)
-
----
+class: center
 
 # How it Works?
 
@@ -156,8 +100,9 @@ This guarantees that it will always run the same,
 regardless of the environment it is running in.
 
 ---
+class: center
 
-# Docker Containers vs Virtual Machine
+# Docker vs Virtual Machine
 
 ![Default-aligned image](images/containers-vs-virtual-machines.png)
 
@@ -166,8 +111,6 @@ regardless of the environment it is running in.
 We will use comparison with VM. Who have ever ever used VMs? I mean
 VirtualBox, Vagrant, VMWare, etc. etc. Sorry guys who never ever used it.
 Maybe some things will be harder to understand.
-
-NOT READ ALL STUFF BELOW IF NOBODY LIKES FIRST DEFINITION!
 
 One more official definition.
 
@@ -192,16 +135,44 @@ to any specific infrastructure – Docker containers run on any computer,
 on any infrastructure and in any cloud.
 
 ---
+class: center
 
-# Use Cases
+# The same but simplified
 
-TODO
+<img src="images/docker-vs-vm.png" width="620px" />
 
 ---
 
+# Use Cases
+
+---
+
+# Use Cases
+
+1. Simplifying Configuration
+
+---
+
+# Use Cases
+
+1. Simplifying Configuration
+2. App Isolation
+
+---
+
+# Use Cases
+
+1. Simplifying Configuration
+2. App Isolation
+3. Rapid Deployment
+
+---
+class: center
+
 # How do we use it
 
-![Right-aligned image](images/CaredoxLogo.jpg)
+![CareDox logo](images/CaredoxLogo.jpg)
+![Docker logo](images/docker-with-caption.png)
 
 ???
 
@@ -209,32 +180,67 @@ For development - all dependencies are Docker containers
 For running tests in Elixir service
 
 ---
+class: center
 
 # Pros and Cons
 
 <img src="images/ProsAndCons.png" width="720px" />
+---
+
+# Pros
 
 ---
 
 # Pros
 
-* Pro #1
-* Pro #2
-* Pro #3
-* Pro #4
+* Multi-platform
+
+---
+
+# Pros
+
+* Multi-platform
+* Well documented
+
+---
+
+# Pros
+
+* Multi-platform
+* Well documented
+* Public image register
 
 ---
 
 # Cons
 
-* Con #1
-* Con #2
-* Con #3
-* Con #4
+---
+
+# Cons
+
+* Performance issues on non-native envs
 
 ---
 
+# Cons
+
+* Performance issues on non-native envs
+* Run applications with graphical interfaces
+
+---
+
+# Cons
+
+* Performance issues on non-native envs
+* Run applications with graphical interfaces
+* Significant learning curve
+
+---
+class: center
+
 # 7 Tips and Tricks
+
+<img src="images/docker_animals.png" width="720px" />
 
 ---
 
@@ -366,6 +372,7 @@ of interdependent services, such as linked docker containers.
 Since it is a pure bash script, it does not have any external dependencies.
 
 ---
+class: smaller-code
 
 # How to Check if Container is Ready
 
@@ -379,7 +386,7 @@ services:
       - "80:8000"
     depends_on:
       - "db"
-    command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
+    command: ["./wait-for-it.sh", "db:5432", "--", "puma"]
   db:
     image: postgres
 ```
@@ -388,7 +395,9 @@ services:
 
 # Where is my space?
 
-<img src="images/screaming.jpg" width="620px" />
+<div class="center">
+  <img src="images/screaming.jpg" width="620px" />
+</div>
 
 ---
 
@@ -423,7 +432,7 @@ alias dcup='docker-compose up'
 
 ---
 
-# Use env files
+# Manage env variables
 
 Instead of doing things like this:
 
@@ -436,6 +445,10 @@ docker run -it \
   --rm alpine /bin/ash
 ```
 
+---
+
+# Use env file
+
 You can do it other way:
 
 ```sh
@@ -447,8 +460,14 @@ TEST2=5678
 TEST3=7890
 ```
 
+---
+
+# Much clearer, isn't it?
+
 ```sh
-docker run -it --env-file ./env.list alpine /bin/ash
+docker run -it \
+  --env-file ./env.list \
+  --rm alpine /bin/ash
 ```
 
 ---
