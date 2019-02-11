@@ -9,7 +9,7 @@ class: center, middle, first
   <img src="images/iTechArtComposition.png" class="first-page__footer-image">
 </div>
 
-# Docker under microscope
+# Docker Under Microscope
 
 ---
 layout: true
@@ -24,6 +24,10 @@ class: center
 # A Story
 
 ![Default-aligned image](images/Pasteur.jpg)
+
+---
+
+# Agenda
 
 ---
 
@@ -71,7 +75,7 @@ class: center
 <ol start="4">
   <li>Top 7 Tips and Tricks</li>
   <li>Best Practices</li>
-  <li>Docker Swarm or Kubernates?</li>
+  <li>Docker Swarm vs Kubernates</li>
 </ol>
 
 ---
@@ -98,6 +102,13 @@ system libraries – anything you can install on a server.
 
 This guarantees that it will always run the same,
 regardless of the environment it is running in.
+
+---
+class: center
+
+# How it Works?
+
+![Default-aligned image](images/docker-how-it-works2.png)
 
 ---
 class: center
@@ -233,7 +244,7 @@ class: center
 
 * Performance issues on non-native envs
 * Run applications with graphical interfaces
-* Significant learning curve
+* Steep learning curve
 
 ---
 class: center
@@ -374,7 +385,7 @@ Since it is a pure bash script, it does not have any external dependencies.
 ---
 class: smaller-code
 
-# How to Check if Container is Ready
+# Compose file example
 
 ```docker-compose
 version: "2"
@@ -491,3 +502,284 @@ but the effort of setting it up and learning to use it a bit will
 pay huge dividends for you in terms of knowledge gleaned.
 I guarantee it. So if you haven’t come to hang out with us
 on IRC yet, do it!
+
+---
+
+# Best Practices
+
+---
+
+# Best Practices
+
+- Dockerfile
+
+---
+
+# Best Practices
+
+- Dockerfile
+- Docker Compose File
+
+---
+
+# Dockerfile Best Practices
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+2. Minimize amount of layers
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+2. Minimize amount of layers
+3. Sort multi-line arguments
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+2. Minimize amount of layers
+3. Sort multi-line arguments
+4. Keep image as tiny as possible
+
+---
+
+# How to Reduce Image Size
+
+---
+
+# How to Reduce Image Size
+
+1. Consider build context
+
+---
+
+# How to Reduce Image Size
+
+1. Consider build context
+2. Use .dockerignore file
+
+---
+
+# How to Reduce Image Size
+
+1. Consider build context
+2. Use .dockerignore file
+3. Don't install extra packages
+
+---
+
+# How to Reduce Image Size
+
+1. Consider build context
+2. Use .dockerignore file
+3. Don't install extra packages
+4. Use multi-stage builds
+
+---
+
+# Docker Compose File Best Practices
+
+---
+
+# Docker Compose File Best Practices
+
+1. Use version 3 or above
+
+---
+
+# Docker Compose File Best Practices
+
+1. Use version 3 or above
+2. Reuse configuration
+
+---
+
+# Docker Compose File Best Practices
+
+1. Use version 3 or above
+2. Reuse configuration
+3. Use env variables
+
+---
+
+# Best Practice for both
+
+Use JSON for `CMD` and `ENTRYPOINT` commands.
+
+Instead of doing like this:
+
+```Dockerfile
+ENTRYPOINT "program arg1 arg2"
+```
+
+Please do it with JSON:
+
+```Dockerfile
+ENTRYPOINT ["program", "arg1", "args2"]
+```
+
+---
+
+# Docker Swarm vs Kubernates
+
+<img src="images/swarm-vs-kubernates.png" width="720px" />
+
+---
+class: center
+
+# What is container orchestration?
+
+<img src="images/docker-team.jpg" width="620px" />
+
+---
+
+# Docker Swarm - Pros
+
+---
+
+# Docker Swarm - Pros
+
+1. Easy of use
+
+---
+
+# Docker Swarm - Pros
+
+1. Easy of use
+2. Backwards compatibility
+
+---
+
+# Docker Swarm - Pros
+
+1. Easy of use
+2. Backwards compatibility
+3. Open Source
+
+---
+
+# Docker Swarm - Cons
+
+---
+
+# Docker Swarm - Cons
+
+1. Young project
+
+---
+
+# Docker Swarm - Cons
+
+1. Young project
+2. Limited features
+
+---
+
+# Kubernates - Pros
+
+---
+
+# Kubernates - Pros
+
+1. Mature project
+
+---
+
+# Kubernates - Pros
+
+1. Mature project
+2. Self-healing: auto-placement, auto-restart, auto-replication, auto-scaling
+
+---
+
+# Kubernates - Pros
+
+1. Mature project
+2. Self-healing: auto-placement, auto-restart, auto-replication, auto-scaling
+3. Modular
+
+---
+
+# Kubernates - Cons
+
+---
+
+# Kubernates - Cons
+
+1. Difficult to set-up
+
+---
+
+# Kubernates - Cons
+
+1. Difficult to set-up
+2. Steeper learning curve than Docker Swarm
+
+---
+class: center
+
+# Decision is up to you!
+
+<img src="images/swarm-vs-kubernates.png" width="720px" />
+
+---
+class: center
+
+# That's all
+
+<img src="images/nice-docker-guy.png" width="420px" />
+
+---
+class: center
+
+# Let's recap
+
+<img src="images/docker-everywhere.jpg" width="620px" />
+
+---
+class: center
+
+# Docker helps to eliminate some issues
+
+<img src="images/works-on-my-machine.jpeg" width="520px" />
+
+---
+class: center
+
+# ...but it has downsides too
+
+<img src="images/docker-cons.png" height="450px" />
+
+---
+class: center
+
+# Use Docker wisely
+
+<img src="images/xzibit.jpg" height="450px" />
+
+---
+class: center
+
+# Docker is developer friendly
+
+<img src="images/docker-team2.jpg" height="500px" />
+
+---
+class: center
+
+# Happy Dockering!
+
+<img src="images/happy-dockering.jpeg" width="720px" />
