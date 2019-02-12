@@ -20,9 +20,9 @@
 }
 
 .first-page__footer {
-  position: absolute;
-  bottom: 2.7rem;
-  left: 50%;
+  min-height: 100%;
+  margin-bottom: -635px;
+  margin-top: 95px;
 }
 
 .first-page__footer-image {
@@ -30,6 +30,70 @@
 }
 
 /* end first page styles*/
+/* author page styles */
+
+.author-slide.remark-slide-content {
+  padding: 0;
+}
+
+.author-slide .author {
+  display: inline-block;
+  background: #ED1C24;
+  min-height: 100%;
+  width: 50%;
+  position: relative;
+}
+
+.author-slide .author .name {
+  font-size: 2rem;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.author-slide .author .info {
+  font-size: 1.5rem;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+.author-slide .info-box {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 90%;
+  height: 30%;
+  margin: auto;
+}
+
+.author-slide .contact-info {
+  display: inline-block;
+  width: 49%;
+  position: relative;
+  min-height: 100%;
+}
+
+.author-slide .contact-header {
+  font-size: 1.5rem;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  line-height: 5rem;
+  margin-top: 20px;
+}
+
+.author-slide .info, .author-slide .contact-data {
+  line-height: 2rem;
+}
+
+.author-slide .contact-data {
+  font-size: 1.5rem;
+  font-family: Arial, sans-serif;
+}
+
+/* end author page styles */
 /* regular page styles */
 
 .regular-page__background {

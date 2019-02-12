@@ -5,11 +5,49 @@ class: center, middle, first
   <p class="first-page__caption">Software Engineering Services</p>
 </div>
 
+# Docker Under Microscope
+
 <div class="first-page__footer">
   <img src="images/iTechArtComposition.png" class="first-page__footer-image">
 </div>
 
-# Docker Under Microscope
+---
+class: author-slide
+
+<div class="author">
+  <div class="info-box">
+    <div class="name">
+      Hi there. <br /> I'm Alexey Cherkashin
+    </div>
+    <div class="info">
+      <div class="row">
+        Department: D10
+      </div>
+      <div class="row">
+        Technologies: Ruby, React, Docker
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contact-info">
+  <div class="info-box">
+    <div class="contact-header">
+      Contact Information:
+    </div>
+    <div class="contact-data">
+      <div class="row">
+        Phone: +375 29 39 53 194
+      </div>
+      <div class="row">
+        Email: aleksei.cherkashin@itechart-group.com
+      </div>
+      <div class="row">
+        Skype: goodniceweb
+      </div>
+    </div>
+  </div>
+</div>
 
 ---
 layout: true
@@ -182,8 +220,8 @@ class: center
 
 # How do we use it
 
-![CareDox logo](images/CaredoxLogo.jpg)
-![Docker logo](images/docker-with-caption.png)
+<img src="images/CaredoxLogo.jpg" width="700px" />
+<img src="images/docker-with-caption.png" width="700px" />
 
 ???
 
@@ -296,7 +334,7 @@ http://goinbigdata.com/docker-run-vs-cmd-vs-entrypoint/
 # CMD
 
 ```Dockerfile
-CMD echo "Hello world" 
+CMD echo "Hello world"
 ```
 
 ```sh
@@ -309,7 +347,7 @@ docker run -it <image>
 # CMD
 
 ```Dockerfile
-CMD echo "Hello world" 
+CMD echo "Hello world"
 ```
 
 ```sh
