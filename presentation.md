@@ -57,13 +57,6 @@ layout: true
 </div>
 
 ---
-class: center
-
-# A Story
-
-![Default-aligned image](images/Pasteur.jpg)
-
----
 
 # Agenda
 
