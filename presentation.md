@@ -12,44 +12,6 @@ class: center, middle, first
 </div>
 
 ---
-class: author-slide
-
-<div class="author">
-  <div class="info-box">
-    <div class="name">
-      Hi there. <br /> I'm Alexey Cherkashin
-    </div>
-    <div class="info">
-      <div class="row">
-        Department: D10
-      </div>
-      <div class="row">
-        Technologies: Ruby, React, Docker
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="contact-info">
-  <div class="info-box">
-    <div class="contact-header">
-      Contact Information:
-    </div>
-    <div class="contact-data">
-      <div class="row">
-        Phone: +375 29 39 53 194
-      </div>
-      <div class="row">
-        Email: aleksei.cherkashin@itechart-group.com
-      </div>
-      <div class="row">
-        Skype: goodniceweb
-      </div>
-    </div>
-  </div>
-</div>
-
----
 layout: true
 
 <div class="regular-page__background">
@@ -157,7 +119,7 @@ class: center
 
 # Docker vs Virtual Machine
 
-![Default-aligned image](images/containers-vs-virtual-machines.png)
+<img src="images/containers-vs-virtual-machines.png" width="800px" />
 
 ???
 
@@ -288,6 +250,16 @@ class: center
 
 <img src="images/docker_animals.png" width="720px" />
 
+???
+
+2 about Dockerfile
+
+1 about compose
+
+3 overall
+
+1 special
+
 ---
 
 # Difference between CMD and ENTRYPOINT
@@ -298,6 +270,8 @@ ENTRYPOINT ["/bin/echo", "Hello world"]
 ```
 
 ???
+
+### Lifehack 1
 
 - CMD sets default command and/or parameters, which can be
   overwritten from command line when docker container runs.
@@ -336,7 +310,7 @@ CMD echo "Hello world"
 
 ```sh
 docker run -it <image>
-# => Hello world
+> Hello world
 ```
 
 ---
@@ -349,7 +323,7 @@ CMD echo "Hello world"
 
 ```sh
 docker run -it <image> /bin/bash
-# =>
+
 root@7de4bed89922:/#
 ```
 
@@ -364,7 +338,7 @@ CMD ["world"]
 
 ```sh
 docker run -it <image>
-# => Hello world
+> Hello world
 ```
 
 ---
@@ -378,7 +352,7 @@ CMD ["world"]
 
 ```sh
 docker run -it <image> John
-# => Hello John
+> Hello John
 ```
 
 ---
@@ -386,11 +360,13 @@ docker run -it <image> John
 # COPY vs ADD commands
 
 ```Dockerfile
-# Within a Dockerfile
-
 COPY script.sh /tmp
 ADD script.sh /tmp
 ```
+
+???
+
+### Lifehack 2
 
 ---
 
@@ -405,6 +381,7 @@ ADD http://www.example.com/script.sh /tmp
 ```
 
 ---
+class: center
 
 # How to Check if Container is Ready
 
@@ -412,18 +389,20 @@ ADD http://www.example.com/script.sh /tmp
 
 ???
 
+### Lifehack 3
+
 wait-for-it.sh is a pure bash script that will wait on the availability
 of a host and TCP port. It is useful for synchronizing the spin-up
 of interdependent services, such as linked docker containers.
 Since it is a pure bash script, it does not have any external dependencies.
 
 ---
-class: smaller-code
+class: xs-code
 
 # Compose file example
 
 ```docker-compose
-version: "2"
+version: "3"
 
 services:
   web:
@@ -445,6 +424,10 @@ services:
   <img src="images/screaming.jpg" width="620px" />
 </div>
 
+???
+
+### Lifehack 4
+
 ---
 
 # Cleanup commands
@@ -463,6 +446,7 @@ docker system prune -a --volumes
 ```
 
 ---
+class: s-code
 
 # Use aliases
 
@@ -476,7 +460,12 @@ alias dps='docker ps -a'
 alias dcup='docker-compose up'
 ```
 
+???
+
+### Lifehack 5
+
 ---
+class: s-code
 
 # Manage env variables
 
@@ -491,7 +480,12 @@ docker run -it \
   --rm alpine /bin/ash
 ```
 
+???
+
+### Lifehack 6
+
 ---
+class: s-code
 
 # Use env file
 
@@ -515,6 +509,19 @@ docker run -it \
   --env-file ./env.list \
   --rm alpine /bin/ash
 ```
+
+???
+
+Невозможно предугадать всё. Хотелось бы лайфхак, который поможет
+в любой ситуации. Жаль, что такого нету. Или есть?
+
+---
+
+# #docker
+
+???
+
+### Lifehack 7
 
 ---
 
@@ -819,3 +826,41 @@ class: center
 # Happy Dockering!
 
 <img src="images/happy-dockering.jpeg" width="720px" />
+
+---
+class: author-slide
+
+<div class="author">
+  <div class="info-box">
+    <div class="name">
+      Hi there. <br /> I'm Alexey Cherkashin
+    </div>
+    <div class="info">
+      <div class="row">
+        Department: D10
+      </div>
+      <div class="row">
+        Technologies: Ruby, React, Docker
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contact-info">
+  <div class="info-box">
+    <div class="contact-header">
+      Contact Information:
+    </div>
+    <div class="contact-data">
+      <div class="row">
+        Phone: +375 29 39 53 194
+      </div>
+      <div class="row">
+        Email: aleksei.cherkashin@itechart-group.com
+      </div>
+      <div class="row">
+        Skype: goodniceweb
+      </div>
+    </div>
+  </div>
+</div>

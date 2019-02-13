@@ -119,17 +119,26 @@
 }
 
 .remark-code {
-  font-size: 2rem;
-  line-height: 3rem;
+  font-size: 3rem;
+  line-height: 5rem;
 }
 
-.remark-slide-content.smaller-code .remark-code {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.remark-slide-content.xs-code .remark-code {
+  font-size: 1.9rem;
+  line-height: 2.3rem;
+}
+
+.remark-slide-content.s-code .remark-code {
+  font-size: 2.5rem;
+  line-height: 3.3rem;
 }
 
 .remark-slide-content.first .remark-slide-number {
   display: none;
+}
+
+.remark-slide-content p {
+  font-size: 2rem;
 }
 
 /* end slide adjustments */
