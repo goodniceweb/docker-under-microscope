@@ -116,6 +116,17 @@ class: center
 
 <img src="images/docker.png" width="400px" />
 
+???
+
+Docker - это OpenSource проект для автоматизации запуска и деплоя приложений
+через контейнеры. С помощью docker вы можете отделить ваше приложение
+от вашей инфраструктуры и обращаться с инфраструктурой как управляемым приложением. 
+
+In a way, Docker is a bit like a virtual machine. But unlike a virtual machine,
+rather than creating a whole virtual operating system, Docker allows applications
+to use the same Linux kernel as the system that they're running on and only
+requires applications be shipped with things not already running on the host computer.
+
 ---
 class: center
 
@@ -175,13 +186,6 @@ but share the kernel with other containers. They run as an isolated process
 in userspace on the host operating system. They’re also not tied
 to any specific infrastructure – Docker containers run on any computer,
 on any infrastructure and in any cloud.
-
----
-class: center
-
-# The same but simplified
-
-<img src="images/docker-vs-vm.png" width="620px" />
 
 ---
 
@@ -663,6 +667,7 @@ ENTRYPOINT ["program", "arg1", "args2"]
 ```
 
 ---
+class: center
 
 # Docker Swarm vs Kubernates
 
