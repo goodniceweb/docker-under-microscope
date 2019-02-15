@@ -729,12 +729,23 @@ ADD scripts.tar.gz /tmp
 ADD http://www.example.com/script.sh /tmp
 ```
 
+???
+
+Но что-то мы о Dockerfile и о Dockerfile. Давайте поговорим о docker-compose.
+
 ---
 class: center
 
-# How to Check if Container is Ready
+# Sometimes docker-compose can crash
 
-<img src="images/wait-for-it.png" width="720px" />
+<img src="images/crash.jpg" width="720px" />
+
+---
+class: center
+
+# Pure bash script 178 LOC
+
+<img src="images/wait-for-it.png" width="520px" />
 
 ???
 
