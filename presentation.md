@@ -12,6 +12,44 @@ class: center, middle, first
 </div>
 
 ---
+class: author-slide
+
+<div class="author">
+  <div class="info-box">
+    <div class="name">
+      Hi there. <br /> I'm Alexey Cherkashin
+    </div>
+    <div class="info">
+      <div class="row">
+        Department: D10
+      </div>
+      <div class="row">
+        Technologies: Ruby, React, Docker
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contact-info">
+  <div class="info-box">
+    <div class="contact-header">
+      Contact Information:
+    </div>
+    <div class="contact-data">
+      <div class="row">
+        Phone: +375 29 39 53 194
+      </div>
+      <div class="row">
+        Email: aleksei.cherkashin@itechart-group.com
+      </div>
+      <div class="row">
+        Skype: goodniceweb
+      </div>
+    </div>
+  </div>
+</div>
+
+---
 layout: true
 
 <div class="regular-page__background">
@@ -19,8 +57,29 @@ layout: true
 </div>
 
 ---
+class: center, middle
+
+<img src="images/smile_baby_gif_490.gif" width="800px" />
+
+???
+
+1.4 in (end of) 2014
+
+1.13 => 17.06
+
+now: 18.09
+
+---
 
 # Agenda
+
+???
+
+Кто уже использует Docker активно на проекте?
+
+Кто запускал локально, для себя, что-то делал чуть-чуть?
+
+Кому еще не удалось попробовать Docker?
 
 ---
 
@@ -48,15 +107,6 @@ layout: true
 # Agenda
 
 <ol start="4">
-  <li>Top 7 Tips and Tricks</li>
-</ol>
-
----
-
-# Agenda
-
-<ol start="4">
-  <li>Top 7 Tips and Tricks</li>
   <li>Best Practices</li>
 </ol>
 
@@ -64,11 +114,9 @@ layout: true
 
 # Agenda
 
-
 <ol start="4">
-  <li>Top 7 Tips and Tricks</li>
   <li>Best Practices</li>
-  <li>Docker Swarm vs Kubernates</li>
+  <li>Top 7 Tips and Tricks</li>
 </ol>
 
 ---
@@ -81,38 +129,24 @@ class: center
 ???
 
 Docker - это OpenSource проект для автоматизации запуска и деплоя приложений
-через контейнеры. С помощью docker вы можете отделить ваше приложение
+через контейнеры. С помощью Docker вы можете отделить ваше приложение
 от вашей инфраструктуры и обращаться с инфраструктурой как управляемым приложением. 
 
-In a way, Docker is a bit like a virtual machine. But unlike a virtual machine,
-rather than creating a whole virtual operating system, Docker allows applications
-to use the same Linux kernel as the system that they're running on and only
-requires applications be shipped with things not already running on the host computer.
+Как это достигается?
 
----
-class: center
+* image
+  - layers
+  - Dockerfile
+  - tag
+* container
+* volume
+* network
+* cli
+* compose
+* swarm
+* hub (registry)
 
-# How it Works?
-
-![Default-aligned image](images/docker-how-it-works.png)
-
-???
-
-Explanation from official site:
-
-Docker containers wrap up a piece of software in a complete filesystem
-that contains everything it needs to run: code, runtime, system tools,
-system libraries – anything you can install on a server.
-
-This guarantees that it will always run the same,
-regardless of the environment it is running in.
-
----
-class: center
-
-# How it Works?
-
-![Default-aligned image](images/docker-how-it-works2.png)
+Но начнем с самого простого: на что Docker похож?
 
 ---
 class: center
@@ -123,31 +157,225 @@ class: center
 
 ???
 
-We will use comparison with VM. Who have ever ever used VMs? I mean
-VirtualBox, Vagrant, VMWare, etc. etc. Sorry guys who never ever used it.
-Maybe some things will be harder to understand.
+Who have ever ever used:
+- VirtualBox
+- Vagrant
+- other?
 
-One more official definition.
+Что самое тяжеловесное в создании новой виртуалки?
+OS!
 
-### General
+В некотором смысле Docker немного похож на виртуальную машину. Но в отличие
+от виртуальной машины, вместо создания виртуальной операционной системы,
+Docker использует то же ядро Linux, что и система, на которой он установлен.
 
-Containers have similar resource isolation and allocation benefits
-as virtual machines but a different architectural approach allows
-them to be much more portable and efficient.
+Что это дает? Помимо того, что это позволяет сохранить место на жестком диске,
+контейнеры также стартуют быстрее, используют меньше памяти и процессорного времени,
+чем виртуальные машины.
 
-#### Virtual Machines
+---
+class: center
 
-Each virtual machine includes the application, the necessary binaries
-and libraries and an entire guest operating system -
-all of which may be tens of GBs in size.
+# How it Works?
 
-#### Containers
+![Default-aligned image](images/docker-how-it-works.png)
 
-Containers include the application and all of its dependencies,
-but share the kernel with other containers. They run as an isolated process
-in userspace on the host operating system. They’re also not tied
-to any specific infrastructure – Docker containers run on any computer,
-on any infrastructure and in any cloud.
+???
+
+Далее идут images. Есть
+- base
+- parent
+Что это такое? Когда переводил, подумал, что образ - не совсем
+передает мысль об их архитектуре. Ведь образ - это что-то цельное.
+Docker image - тоже цельный. Но он строится на слоях, layers.
+
+Тут хорошо видно.
+Ораньжевый - base image, busybox. Мало полезного.
+Голубой - parent image. Есть несколько дополнительных слоев, для подготовки
+к запуску приложения.
+
+Base or parent: postgres:9.4, ubuntu:18.04
+
+---
+class: center
+
+# How it Works?
+
+![Default-aligned image](images/docker-how-it-works2.png)
+
+???
+
+У каждого слоя есть ссылка на предыдущий. Чтобы сохранять последовательность.
+Слои в images - read-only сущности. Вы не можете изменить уже существующий слой.
+Только наложить следующий. Это может быть другой read-only слой, созданый через
+директиву в Dockerfile. А может быть read-write слой, то есть, ваш контейнер.
+
+Давайте потренируемся создавать свой собственный image.
+
+---
+class: s-code
+
+# Let's create our own image!
+
+```Dockerfile
+FROM ubuntu:18.04
+
+RUN mkdir /workdir
+WORKDIR /workdir
+COPY script.sh .
+ENV NAME Greg
+RUN chmod +x script.sh
+
+ENTRYPOINT ["/bin/bash", "./script.sh"]
+```
+
+---
+# Always start with FROM
+
+```Dockerfile
+FROM ubuntu:18.04
+
+# RUN mkdir /workdir
+# ...
+```
+
+---
+# Prepare image
+
+```Dockerfile
+# FROM ubuntu:18.04
+
+RUN mkdir /workdir
+
+# ... 
+```
+
+---
+# Change you current active directory
+
+```Dockerfile
+# RUN mkdir /workdir
+
+WORKDIR /workdir
+
+# ... 
+```
+
+---
+# You might need some files
+
+```Dockerfile
+# WORKDIR /workdir
+
+COPY /workdir
+
+# ... 
+```
+
+???
+
+Есть еще ADD.
+
+Позже посмотрим чем отличаются COPY and ADD
+
+---
+
+# File content
+
+```sh
+echo "Hello ${NAME}! \
+  My name is `hostname`. \
+  I'm in `pwd`"
+```
+
+---
+# Setup ENV variables
+
+```Dockerfile
+# COPY /workdir
+
+ENV NAME Greg
+
+# ... 
+```
+
+---
+# Define what is executable
+
+```Dockerfile
+# ...
+# ENV NAME Greg
+
+ENTRYPOINT ["/bin/bash", "./script.sh"]
+```
+
+???
+
+Определите, что будет выполняться по умолчанию в вашем контейнере.
+
+Есть еще CMD.
+
+Позже посмотрим чем отличаются CMD and ENTRYPOINT
+
+---
+
+# It's time to build:
+
+```sh
+docker build . \
+  -t goodniceweb/simple-docker-demo:0.0.1
+```
+
+---
+class: s-code
+
+# First we get base image
+
+```sh
+Sending build context to Docker daemon  14.96MB
+Step 1/7 : FROM ubuntu:18.04
+18.04: Pulling from library/ubuntu
+6cf436f81810: Extracting [====>  ]  26.87MB/32.37MB
+987088a85b96: Download complete             
+b4624b3efe06: Download complete
+d42beb8ded59: Download complete            
+```
+
+---
+class: s-code
+
+# Then create our own layers
+
+```sh
+# ...
+Status: Downloaded newer image for ubuntu:18.04
+ ---> 47b19964fb50
+Step 2/7 : RUN mkdir /workdir
+ ---> Running in 1bfb7326221f
+Removing intermediate container 1bfb7326221f
+ ---> 3096544e4da7
+# Step 3/7 : WORKDIR /workdir
+```
+
+---
+
+# Let's start container
+
+```sh
+docker run \
+  -e NAME=Alex \
+  goodniceweb/simple-docker-demo
+```
+
+---
+
+# Result
+
+```sh
+Hello Alex!
+My name is 41b617072c8d.
+I'm in /workdir
+```
 
 ---
 
@@ -193,6 +421,7 @@ class: center
 # Pros and Cons
 
 <img src="images/ProsAndCons.png" width="720px" />
+
 ---
 
 # Pros
@@ -237,11 +466,131 @@ class: center
 
 ---
 
-# Cons
+# Best Practices
 
-* Performance issues on non-native envs
-* Run applications with graphical interfaces
-* Steep learning curve
+---
+
+# Best Practices
+
+- Dockerfile
+
+---
+
+# Best Practices
+
+- Dockerfile
+- Docker Compose File
+
+---
+
+# Dockerfile Best Practices
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+2. Minimize amount of layers
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+2. Minimize amount of layers
+3. Sort multi-line arguments
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+2. Minimize amount of layers
+3. Sort multi-line arguments
+4. Keep image as tiny as possible
+
+---
+
+# How to Reduce Image Size
+
+---
+
+# How to Reduce Image Size
+
+1. Consider build context
+
+---
+
+# How to Reduce Image Size
+
+1. Consider build context
+2. Use .dockerignore file
+
+---
+
+# How to Reduce Image Size
+
+1. Consider build context
+2. Use .dockerignore file
+3. Don't install extra packages
+
+---
+
+# How to Reduce Image Size
+
+1. Consider build context
+2. Use .dockerignore file
+3. Don't install extra packages
+4. Use multi-stage builds
+
+---
+
+# Docker Compose File Best Practices
+
+---
+
+# Docker Compose File Best Practices
+
+1. Use version 3 or above
+
+---
+
+# Docker Compose File Best Practices
+
+1. Use version 3 or above
+2. Reuse configuration
+
+---
+
+# Docker Compose File Best Practices
+
+1. Use version 3 or above
+2. Reuse configuration
+3. Use env variables
+
+---
+
+# Best Practice for both
+
+Use JSON for `CMD` and `ENTRYPOINT` commands.
+
+Instead of doing like this:
+
+```Dockerfile
+ENTRYPOINT "program arg1 arg2"
+```
+
+Please do it with JSON:
+
+```Dockerfile
+ENTRYPOINT ["program", "arg1", "args2"]
+```
 
 ---
 class: center
@@ -546,249 +895,16 @@ I guarantee it. So if you haven’t come to hang out with us
 on IRC yet, do it!
 
 ---
-
-# Best Practices
-
----
-
-# Best Practices
-
-- Dockerfile
-
----
-
-# Best Practices
-
-- Dockerfile
-- Docker Compose File
-
----
-
-# Dockerfile Best Practices
-
----
-
-# Dockerfile Best Practices
-
-1. Decouple applications
-
----
-
-# Dockerfile Best Practices
-
-1. Decouple applications
-2. Minimize amount of layers
-
----
-
-# Dockerfile Best Practices
-
-1. Decouple applications
-2. Minimize amount of layers
-3. Sort multi-line arguments
-
----
-
-# Dockerfile Best Practices
-
-1. Decouple applications
-2. Minimize amount of layers
-3. Sort multi-line arguments
-4. Keep image as tiny as possible
-
----
-
-# How to Reduce Image Size
-
----
-
-# How to Reduce Image Size
-
-1. Consider build context
-
----
-
-# How to Reduce Image Size
-
-1. Consider build context
-2. Use .dockerignore file
-
----
-
-# How to Reduce Image Size
-
-1. Consider build context
-2. Use .dockerignore file
-3. Don't install extra packages
-
----
-
-# How to Reduce Image Size
-
-1. Consider build context
-2. Use .dockerignore file
-3. Don't install extra packages
-4. Use multi-stage builds
-
----
-
-# Docker Compose File Best Practices
-
----
-
-# Docker Compose File Best Practices
-
-1. Use version 3 or above
-
----
-
-# Docker Compose File Best Practices
-
-1. Use version 3 or above
-2. Reuse configuration
-
----
-
-# Docker Compose File Best Practices
-
-1. Use version 3 or above
-2. Reuse configuration
-3. Use env variables
-
----
-
-# Best Practice for both
-
-Use JSON for `CMD` and `ENTRYPOINT` commands.
-
-Instead of doing like this:
-
-```Dockerfile
-ENTRYPOINT "program arg1 arg2"
-```
-
-Please do it with JSON:
-
-```Dockerfile
-ENTRYPOINT ["program", "arg1", "args2"]
-```
-
----
 class: center
 
-# Docker Swarm vs Kubernates
-
-<img src="images/swarm-vs-kubernates.png" width="720px" />
-
----
-class: center
-
-# What is container orchestration?
-
-<img src="images/docker-team.jpg" width="620px" />
-
----
-
-# Docker Swarm - Pros
-
----
-
-# Docker Swarm - Pros
-
-1. Easy of use
-
----
-
-# Docker Swarm - Pros
-
-1. Easy of use
-2. Backwards compatibility
-
----
-
-# Docker Swarm - Pros
-
-1. Easy of use
-2. Backwards compatibility
-3. Open Source
-
----
-
-# Docker Swarm - Cons
-
----
-
-# Docker Swarm - Cons
-
-1. Young project
-
----
-
-# Docker Swarm - Cons
-
-1. Young project
-2. Limited features
-
----
-
-# Kubernates - Pros
-
----
-
-# Kubernates - Pros
-
-1. Mature project
-
----
-
-# Kubernates - Pros
-
-1. Mature project
-2. Self-healing: auto-placement, auto-restart, auto-replication, auto-scaling
-
----
-
-# Kubernates - Pros
-
-1. Mature project
-2. Self-healing: auto-placement, auto-restart, auto-replication, auto-scaling
-3. Modular
-
----
-
-# Kubernates - Cons
-
----
-
-# Kubernates - Cons
-
-1. Difficult to set-up
-
----
-
-# Kubernates - Cons
-
-1. Difficult to set-up
-2. Steeper learning curve than Docker Swarm
-
----
-class: center
-
-# Decision is up to you!
-
-<img src="images/swarm-vs-kubernates.png" width="720px" />
-
----
-class: center
-
-# That's all
+# Let's recap
 
 <img src="images/nice-docker-guy.png" width="420px" />
 
 ---
 class: center
 
-# Let's recap
+# You should try Docker if you haven't yet
 
 <img src="images/docker-everywhere.jpg" width="620px" />
 

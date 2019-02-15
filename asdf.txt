@@ -1,0 +1,21 @@
+пробельчик / backscace
+
+35 слайд - скрин
+
+Осинка
+
+Пояснения - по разному
+
+Сильный вывод!
+
+
+image
+ - layers
+container
+volume
+network
+Dockerfile
+cli
+compose
+swarm
+hub (registry)
