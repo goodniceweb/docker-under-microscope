@@ -734,6 +734,11 @@ ADD http://www.example.com/script.sh /tmp
 Но что-то мы о Dockerfile и о Dockerfile. Давайте поговорим о docker-compose.
 
 ---
+class: center, middle
+
+<img src="images/docker-compose.png" width="720px" />
+
+---
 class: center
 
 # Sometimes docker-compose can crash
@@ -743,9 +748,11 @@ class: center
 ---
 class: center
 
-# Pure bash script 178 LOC
+# Pure bash script
 
 <img src="images/wait-for-it.png" width="520px" />
+
+## 178 LOC
 
 ???
 
