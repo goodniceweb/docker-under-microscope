@@ -21,9 +21,6 @@ class: author-slide
     </div>
     <div class="info">
       <div class="row">
-        Department: D10
-      </div>
-      <div class="row">
         Technologies: Ruby, React, Docker
       </div>
     </div>
@@ -224,7 +221,6 @@ RUN mkdir /workdir
 WORKDIR /workdir
 COPY script.sh .
 ENV NAME Greg
-RUN chmod +x script.sh
 
 ENTRYPOINT ["/bin/bash", "./script.sh"]
 ```
@@ -267,7 +263,7 @@ WORKDIR /workdir
 ```Dockerfile
 # WORKDIR /workdir
 
-COPY /workdir
+COPY script.sh /workdir
 
 # ... 
 ```
@@ -407,12 +403,12 @@ class: center
 
 # How do we use it
 
-<img src="images/CaredoxLogo.jpg" width="700px" />
 <img src="images/docker-with-caption.png" width="700px" />
 
 ???
 
 For development - all dependencies are Docker containers
+
 For running tests in Elixir service
 
 ---
@@ -500,6 +496,65 @@ class: center
 
 ---
 
+# Don't do like this
+
+```Dockerfile
+RUN apt install -y htop 
+RUN apt install -y build-essential 
+RUN apt install -y libcurl4
+RUN apt install -y git
+```
+
+---
+
+# Do like this instead:
+
+```Dockerfile
+RUN apt install -y htop \
+  build-essential \
+  libcurl4 \
+  git
+```
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+2. Minimize amount of layers
+
+---
+
+# Dockerfile Best Practices
+
+1. Decouple applications
+2. Minimize amount of layers
+3. Sort multi-line arguments
+
+---
+
+# Don't do like this
+
+```Dockerfile
+RUN apt install -y htop \
+  build-essential \
+  libcurl4 \
+  git
+```
+
+---
+
+# Do like this instead:
+
+```Dockerfile
+RUN apt install -y build-essential \
+  git \
+  htop \
+  libcurl4
+```
+
+---
+
 # Dockerfile Best Practices
 
 1. Decouple applications
@@ -548,6 +603,48 @@ class: center
 2. Use .dockerignore file
 3. Don't install extra packages
 4. Use multi-stage builds
+
+---
+class: s-code
+
+# Multi-stage build example (part 1)
+
+```Dockerfile
+# Stage 1 - the build process
+FROM node:8.15 as build-deps
+WORKDIR /usr/src/app
+COPY package.json yarn.lock ./
+RUN yarn
+COPY . ./
+RUN yarn build
+```
+
+---
+class: s-code
+
+# Multi-stage build example (part 2)
+
+```Dockerfile
+# Stage 2 - the production environment
+FROM nginx:1.12-alpine
+COPY --from=build-deps \
+  /usr/src/app/build \
+  /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+---
+
+# Build and run image
+
+```sh
+docker build . \
+  -t goodniceweb/multi-stage
+docker run \
+  -p 8080:80 \
+  goodniceweb/multi-stage
+```
 
 ---
 
@@ -970,9 +1067,6 @@ class: author-slide
       Hi there. <br /> I'm Alexey Cherkashin
     </div>
     <div class="info">
-      <div class="row">
-        Department: D10
-      </div>
       <div class="row">
         Technologies: Ruby, React, Docker
       </div>
