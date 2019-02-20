@@ -46,6 +46,16 @@ class: author-slide
   </div>
 </div>
 
+???
+
+WHY ME?
+
+Watch Docker from (end of) 2014
+
+It was 1.4 that time
+
+NEXT
+
 ---
 layout: true
 
@@ -60,11 +70,25 @@ class: center, middle
 
 ???
 
-1.4 in (end of) 2014
+## 1.13.1 => 17.03
 
-1.13 => 17.06
+## Changed versioning approach
 
-now: 18.09
+## now: 18.09
+
+Starting with this release, Docker is on a monthly release cycle and uses a new YY.MM versioning scheme to reflect this. Two channels are available: monthly and quarterly. Any given monthly release will only receive security and bugfixes until the next monthly release is available. Quarterly releases receive security and bugfixes for 4 months after initial release. This release includes bugfixes for 1.13.1 but there are no major feature additions and the API version stays the same. Upgrading from Docker 1.13.1 to 17.03.0 is expected to be simple and low-risk
+
+
+NEXT
+
+---
+class: center, middle
+
+<img src="images/Mature-Man.jpg" height="500px" />
+
+???
+
+Зрелый, состоявшийся продукт. Сами убедитесь
 
 ---
 
@@ -72,11 +96,11 @@ now: 18.09
 
 ???
 
-Кто уже использует Docker активно на проекте?
+## Кто уже использует Docker активно на проекте?
 
-Кто запускал локально, для себя, что-то делал чуть-чуть?
+## Кто запускал локально, для себя, что-то делал чуть-чуть?
 
-Кому еще не удалось попробовать Docker?
+## Кому еще не удалось попробовать Docker?
 
 ---
 
@@ -179,6 +203,9 @@ class: center
 
 ???
 
+Как видим сначала идёт линукс ядро. Оно общее для всех контейнеров. Так как
+взаимодействие с ним необходимо только для чтения.
+
 Далее идут images. Есть
 - base
 - parent
@@ -207,6 +234,49 @@ class: center
 Только наложить следующий. Это может быть другой read-only слой, созданый через
 директиву в Dockerfile. А может быть read-write слой, то есть, ваш контейнер.
 
+---
+
+# Use Cases
+
+---
+
+# Use Cases
+
+1. Simplifying Configuration
+
+---
+
+# Use Cases
+
+1. Simplifying Configuration
+2. App Isolation
+
+---
+
+# Use Cases
+
+1. Simplifying Configuration
+2. App Isolation
+3. Rapid Deployment
+
+???
+
+Было бы несправедливо сказать о use cases, и не упомянуть как сам использую его.
+
+NEXT
+
+---
+class: center, middle
+
+<img src="images/docker-for-healthcare.png" height="560px" />
+
+???
+
+For development - all dependencies are Docker containers
+
+For running tests in Elixir service
+
+Итак, мы поговорили о том, что такое докер и что он нам дает.
 Давайте потренируемся создавать свой собственный image.
 
 ---
@@ -226,6 +296,7 @@ ENTRYPOINT ["/bin/bash", "./script.sh"]
 ```
 
 ---
+
 # Always start with FROM
 
 ```Dockerfile
@@ -236,6 +307,7 @@ FROM ubuntu:18.04
 ```
 
 ---
+
 # Prepare image
 
 ```Dockerfile
@@ -247,6 +319,7 @@ RUN mkdir /workdir
 ```
 
 ---
+
 # Change you current active directory
 
 ```Dockerfile
@@ -258,6 +331,7 @@ WORKDIR /workdir
 ```
 
 ---
+
 # You might need some files
 
 ```Dockerfile
@@ -285,6 +359,7 @@ echo "Hello ${NAME}! \
 ```
 
 ---
+
 # Setup ENV variables
 
 ```Dockerfile
@@ -296,6 +371,7 @@ ENV NAME Greg
 ```
 
 ---
+
 # Define what is executable
 
 ```Dockerfile
@@ -372,44 +448,6 @@ Hello Alex!
 My name is 41b617072c8d.
 I'm in /workdir
 ```
-
----
-
-# Use Cases
-
----
-
-# Use Cases
-
-1. Simplifying Configuration
-
----
-
-# Use Cases
-
-1. Simplifying Configuration
-2. App Isolation
-
----
-
-# Use Cases
-
-1. Simplifying Configuration
-2. App Isolation
-3. Rapid Deployment
-
----
-class: center
-
-# How do we use it
-
-<img src="images/docker-with-caption.png" width="700px" />
-
-???
-
-For development - all dependencies are Docker containers
-
-For running tests in Elixir service
 
 ---
 class: center
@@ -650,6 +688,33 @@ docker run \
 
 # Docker Compose File Best Practices
 
+???
+
+Давайте сначала разберем синтаксис файла хотя бы базовый.
+
+---
+class: xs-code
+
+# Compose file example
+
+```docker-compose
+version: "3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "80:8000"
+    depends_on:
+      - "db"
+  db:
+    image: postgres
+```
+
+---
+
+# Docker Compose File Best Practices
+
 ---
 
 # Docker Compose File Best Practices
@@ -708,7 +773,7 @@ class: center
 
 ---
 
-# Difference between CMD and ENTRYPOINT
+# Lifehack #1: Difference between CMD and ENTRYPOINT
 
 ```Dockerfile
 CMD ["/bin/echo", "Hello world"]
@@ -803,7 +868,7 @@ docker run -it <image> John
 
 ---
 
-# COPY vs ADD commands
+# Lifehack #2: COPY vs ADD commands
 
 ```Dockerfile
 COPY script.sh /tmp
@@ -816,7 +881,7 @@ ADD script.sh /tmp
 
 ---
 
-# COPY vs ADD commands
+# Lifehack #2: COPY vs ADD commands
 
 ```Dockerfile
 # 1 - Be able to automatically untar files
@@ -845,7 +910,7 @@ class: center
 ---
 class: center
 
-# Pure bash script
+# Lifehack #3: Use pure bash script
 
 <img src="images/wait-for-it.png" width="520px" />
 
@@ -894,7 +959,7 @@ services:
 
 ---
 
-# Cleanup commands
+# Lifehack #4: Use cleanup commands
 
 Remove all unused images:
 
@@ -912,7 +977,7 @@ docker system prune -a --volumes
 ---
 class: s-code
 
-# Use aliases
+# Lifehack #5: Use aliases
 
 ```sh
 alias dr='docker rm $(docker ps -aq)'
@@ -951,7 +1016,7 @@ docker run -it \
 ---
 class: s-code
 
-# Use env file
+# Lifehack 6: Use env file
 
 You can do it other way:
 
@@ -981,7 +1046,11 @@ docker run -it \
 
 ---
 
-# #docker
+# Lifehack #7: 
+
+---
+
+# Lifehack #7: #docker
 
 ???
 
