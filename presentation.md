@@ -799,6 +799,13 @@ services:
 
 1. Use version 3 or above
 2. Reuse configuration
+
+---
+
+# Docker Compose File Best Practices
+
+1. Use version 3 or above
+2. Reuse configuration
 3. Use environment variables
 
 ---
@@ -843,6 +850,12 @@ services:
     image: postgres:${POSTGRES_VERSION}
 ```
 
+???
+
+1. Use version 3 or above
+2. Reuse configuration
+3. Use environment variables
+
 ---
 
 # Best Practice for both
@@ -862,7 +875,6 @@ ENTRYPOINT ["program", "arg1", "args2"]
 ???
 
 ### Use JSON for `CMD` and `ENTRYPOINT` commands.
-
 
 ---
 class: center
