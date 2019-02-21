@@ -847,8 +847,6 @@ services:
 
 # Best Practice for both
 
-Use JSON for `CMD` and `ENTRYPOINT` commands.
-
 Instead of doing like this:
 
 ```Dockerfile
@@ -860,6 +858,11 @@ Please do it with JSON:
 ```Dockerfile
 ENTRYPOINT ["program", "arg1", "args2"]
 ```
+
+???
+
+### Use JSON for `CMD` and `ENTRYPOINT` commands.
+
 
 ---
 class: center
