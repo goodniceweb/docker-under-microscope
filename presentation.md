@@ -993,6 +993,10 @@ alias dcup='docker-compose up'
 
 ### Lifehack 5
 
+### Save 1-8 days per year!
+
+### Brainscape founder: Andrew Cohen
+
 ---
 class: s-code
 
