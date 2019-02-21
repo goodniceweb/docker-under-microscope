@@ -698,7 +698,7 @@ class: xs-code
 # Compose file example
 
 ```docker-compose
-version: "3"
+version: "2"
 
 services:
   web:
@@ -708,7 +708,7 @@ services:
     depends_on:
       - "db"
   db:
-    image: postgres
+    image: postgres:9.6
 ```
 
 ---
@@ -722,11 +722,29 @@ services:
 1. Use version 3 or above
 
 ---
+class: xs-code
+
+# Version fix
+
+```docker-compose
+version: "3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "80:8000"
+    depends_on:
+      - "db"
+  db:
+    image: postgres:9.6
+```
+
+---
 
 # Docker Compose File Best Practices
 
 1. Use version 3 or above
-2. Reuse configuration
 
 ---
 
@@ -734,7 +752,96 @@ services:
 
 1. Use version 3 or above
 2. Reuse configuration
-3. Use env variables
+
+---
+class: xs-code
+
+# Reuse configuration
+
+```docker-compose
+version: "3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "80:8000"
+    depends_on:
+      - "db"
+  worker: ..?
+  db:
+    image: postgres:9.6
+```
+
+---
+class: xs-code
+
+```docker-compose
+app: &app
+  build: .
+  depends_on:
+    - "db"
+
+services:
+  web:
+    <<: *app
+    ports:
+      - "80:8000"
+  worker:
+    <<: *app
+  db:
+    image: postgres:9.6
+```
+
+---
+
+# Docker Compose File Best Practices
+
+1. Use version 3 or above
+2. Reuse configuration
+3. Use environment variables
+
+---
+class: xs-code
+
+# Use environment variables
+
+```docker-compose
+version: "3"
+
+services:
+  ...
+  db:
+    image: postgres:${POSTGRES_VERSION}
+```
+
+```bash
+> echo .env
+
+POSTGRES_VERSION=9.6
+```
+
+---
+class: xs-code
+
+```docker-compose
+version: "3"
+
+app: &app
+  build: .
+  depends_on:
+    - "db"
+
+services:
+  web:
+    <<: *app
+    ports:
+      - "80:8000"
+  worker:
+    <<: *app
+  db:
+    image: postgres:${POSTGRES_VERSION}
+```
 
 ---
 
@@ -753,6 +860,20 @@ Please do it with JSON:
 ```Dockerfile
 ENTRYPOINT ["program", "arg1", "args2"]
 ```
+
+---
+class: center
+
+# PID 1 problem
+
+<img src="images/pid-problem1.png" height="400px" />
+
+---
+class: center
+
+# Stop signal
+
+<img src="images/pid-problem2.png" height="400px" />
 
 ---
 class: center
@@ -901,11 +1022,31 @@ class: center, middle
 <img src="images/docker-compose.png" width="720px" />
 
 ---
+class: xs-code
+
+# Still compose file
+
+```docker-compose
+version: "3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "80:8000"
+    depends_on:
+      - "db"
+  db:
+    image: postgres
+```
+
+---
 class: center
 
 # Sometimes docker-compose can crash
 
 <img src="images/crash.jpg" width="720px" />
+
 
 ---
 class: center
@@ -928,7 +1069,7 @@ Since it is a pure bash script, it does not have any external dependencies.
 ---
 class: xs-code
 
-# Compose file example
+# Usage example
 
 ```docker-compose
 version: "3"
