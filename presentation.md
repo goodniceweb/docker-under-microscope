@@ -1261,6 +1261,10 @@ class: center
 
 <img src="images/docker-everywhere.jpg" width="620px" />
 
+???
+
+# даже эта презентация - в Docker
+
 ---
 class: center
 
