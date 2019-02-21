@@ -642,6 +642,10 @@ RUN apt install -y build-essential \
 3. Don't install extra packages
 4. Use multi-stage builds
 
+???
+
+### Multi-stage builds start from 17.05
+
 ---
 class: s-code
 
@@ -789,6 +793,7 @@ services:
       - "80:8000"
   worker:
     <<: *app
+    entrypoint: ["bundle", "exec", "sidekiq"]
   db:
     image: postgres:9.6
 ```
@@ -833,7 +838,6 @@ class: xs-code
 
 ```docker-compose
 version: "3"
-
 app: &app
   build: .
   depends_on:
@@ -846,6 +850,7 @@ services:
       - "80:8000"
   worker:
     <<: *app
+    entrypoint: ["bundle", "exec", "sidekiq"]
   db:
     image: postgres:${POSTGRES_VERSION}
 ```
@@ -889,6 +894,10 @@ class: center
 # Stop signal
 
 <img src="images/pid-problem2.png" height="400px" />
+
+???
+
+В секции 7 лайфхаков поговорим о CMD and ENTRYPOINT
 
 ---
 class: center
